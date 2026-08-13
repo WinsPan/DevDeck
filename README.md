@@ -2,6 +2,8 @@
 
 以任务为中心的开发者工具、命令、OCI 镜像、配置模板与分步指南工作台。
 
+在线访问：<https://tools.15587117.xyz/>
+
 DevDeck 不只是展示一条命令，而是同时说明：
 
 - 什么时候适用；
@@ -77,6 +79,8 @@ npm run deploy
 Wrangler 会先构建，再将 `dist/` 发布为 Worker 静态资源。
 
 ### 方式二：Cloudflare Dashboard 连接 GitHub
+
+当前生产环境已连接 `WinsPan/DevDeck` 的 `main` 分支，推送后由 Workers Builds 自动构建与发布。首次在其他 Cloudflare 账号复用时：
 
 1. 打开 Cloudflare Dashboard；
 2. 进入 **Workers & Pages → Create → Import a repository**；
