@@ -1,4 +1,4 @@
-import { ArrowRight, Box, Braces, Clock3, Code2, Database, FileCode2, FileDiff, Fingerprint, KeyRound, Link2, ListChecks, Regex, Rows3, Search, ShieldCheck, TerminalSquare, Timer } from 'lucide-react'
+import { ArrowRight, Box, Braces, Clock3, Code2, Container, Database, FileCode2, FileDiff, Fingerprint, KeyRound, Link2, ListChecks, Network, Regex, Rows3, Search, Send, ShieldCheck, TerminalSquare, Timer } from 'lucide-react'
 import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { resources } from '../data/resources'
@@ -26,6 +26,9 @@ const directTools = [
   { slug: 'text-diff-workbench', title: '文本 Diff', description: '新增、删除、统一视图', icon: FileDiff, accent: 'green' },
   { slug: 'cron-workbench', title: 'Cron 工作台', description: '解释与未来执行时间', icon: Timer, accent: 'amber' },
   { slug: 'sql-workbench', title: 'SQL 工作台', description: '格式化与静态检查', icon: Database, accent: 'blue' },
+  { slug: 'cidr-calculator', title: 'CIDR 计算', description: '子网、掩码、地址范围', icon: Network, accent: 'cyan' },
+  { slug: 'curl-generator', title: 'cURL 构造', description: '方法、Header 与 Body', icon: Send, accent: 'green' },
+  { slug: 'docker-service-generator', title: 'Docker 生成器', description: 'Run、Compose 与 .env', icon: Container, accent: 'blue' },
 ]
 
 const directTasks = [

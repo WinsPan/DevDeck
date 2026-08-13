@@ -371,6 +371,9 @@ function Workspace({ input, setInput, output, inputLabel, outputLabel, actions, 
 const DiffWorkbench = lazy(() => import('./DiffWorkbench'))
 const CronWorkbench = lazy(() => import('./CronWorkbench'))
 const SqlWorkbench = lazy(() => import('./SqlWorkbench'))
+const CidrWorkbench = lazy(() => import('./CidrWorkbench'))
+const CurlWorkbench = lazy(() => import('./CurlWorkbench'))
+const DockerGenerator = lazy(() => import('./DockerGenerator'))
 
 function LazyTool({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<div className="tool-loading"><span />正在加载工具…</div>}>{children}</Suspense>
@@ -389,5 +392,8 @@ export function ToolRenderer({ kind }: { kind: ToolKind }) {
   if (kind === 'query') return <QueryStringTool />
   if (kind === 'diff') return <LazyTool><DiffWorkbench /></LazyTool>
   if (kind === 'cron') return <LazyTool><CronWorkbench /></LazyTool>
-  return <LazyTool><SqlWorkbench /></LazyTool>
+  if (kind === 'sql') return <LazyTool><SqlWorkbench /></LazyTool>
+  if (kind === 'cidr') return <LazyTool><CidrWorkbench /></LazyTool>
+  if (kind === 'curl') return <LazyTool><CurlWorkbench /></LazyTool>
+  return <LazyTool><DockerGenerator /></LazyTool>
 }

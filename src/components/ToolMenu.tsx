@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Braces, ChevronDown, Clock3, Code2, Database, FileDiff, Fingerprint, KeyRound, Link2, Regex, Rows3, Search, Timer, X } from 'lucide-react'
+import { Braces, ChevronDown, Clock3, Code2, Container, Database, FileDiff, Fingerprint, KeyRound, Link2, Network, Regex, Rows3, Search, Send, Timer, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const directTools = [
@@ -14,6 +14,9 @@ const directTools = [
   { slug: 'text-diff-workbench', label: '文本 Diff', hint: '新增、删除、统一视图', icon: FileDiff },
   { slug: 'cron-workbench', label: 'Cron 工作台', hint: '解释与未来执行时间', icon: Timer },
   { slug: 'sql-workbench', label: 'SQL 工作台', hint: '格式化与静态检查', icon: Database },
+  { slug: 'cidr-calculator', label: 'CIDR 计算', hint: '子网、掩码、地址范围', icon: Network },
+  { slug: 'curl-generator', label: 'cURL 构造', hint: '方法、Header 与 Body', icon: Send },
+  { slug: 'docker-service-generator', label: 'Docker 生成器', hint: 'Run、Compose 与 .env', icon: Container },
 ]
 
 export function ToolMenu() {

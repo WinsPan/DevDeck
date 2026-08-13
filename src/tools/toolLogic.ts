@@ -1,4 +1,4 @@
-export type ToolKind = 'json' | 'encoder' | 'timestamp' | 'jwt' | 'generator' | 'hash' | 'text' | 'url' | 'regex' | 'query' | 'diff' | 'cron' | 'sql'
+export type ToolKind = 'json' | 'encoder' | 'timestamp' | 'jwt' | 'generator' | 'hash' | 'text' | 'url' | 'regex' | 'query' | 'diff' | 'cron' | 'sql' | 'cidr' | 'curl' | 'docker'
 
 export function toolKindFromSlug(slug: string): ToolKind | undefined {
   const map: Record<string, ToolKind> = {
@@ -15,6 +15,9 @@ export function toolKindFromSlug(slug: string): ToolKind | undefined {
     'text-diff-workbench': 'diff',
     'cron-workbench': 'cron',
     'sql-workbench': 'sql',
+    'cidr-calculator': 'cidr',
+    'curl-generator': 'curl',
+    'docker-service-generator': 'docker',
   }
   return map[slug]
 }
