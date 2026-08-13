@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { GitBranch, Menu, Moon, Search, Sun, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { useTheme } from '../hooks/useTheme'
+import { ToolMenu } from './ToolMenu'
 
 interface LayoutProps {
   children: ReactNode
@@ -27,6 +28,7 @@ export function Layout({ children, onSearch }: LayoutProps) {
           </Link>
 
           <nav className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label="主导航">
+            <ToolMenu />
             <NavLink to="/library" onClick={() => setMenuOpen(false)}>资源库</NavLink>
             <NavLink to="/library/guide" onClick={() => setMenuOpen(false)}>分步指南</NavLink>
             <a href="https://github.com/WinsPan/DevDeck" target="_blank" rel="noreferrer">参与贡献</a>
