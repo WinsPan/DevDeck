@@ -1,9 +1,32 @@
 import { describe, expect, it } from 'vitest'
-import { base64Decode, base64Encode, cleanTrackingUrl, decodeJwt, formatJson, hexDecode, hexEncode, randomSecret, textStats } from './toolLogic'
+import { analyzeJson, base64Decode, base64Encode, cleanTrackingUrl, decodeJwt, formatJson, hexDecode, hexEncode, randomSecret, sortJsonKeys, textStats } from './toolLogic'
 
 describe('tool logic', () => {
   it('formats valid JSON', () => {
     expect(formatJson('{"a":1}')).toBe('{\n  "a": 1\n}')
+  })
+
+  it('analyzes and formats JSON instantly', () => {
+    expect(analyzeJson('{"b":2,"a":1}', { indent: 2, sortKeys: true })).toMatchObject({
+      valid: true,
+      rootType: 'object',
+      itemCount: 2,
+      output: '{\n  "a": 1,\n  "b": 2\n}',
+    })
+  })
+
+  it('reports invalid JSON without a stale output', () => {
+    const result = analyzeJson('{"a":}')
+    expect(result.valid).toBe(false)
+    expect(result.output).toBe('')
+    expect(result.error).toBeTruthy()
+  })
+
+  it('sorts nested object keys but keeps array order', () => {
+    expect(sortJsonKeys({ z: { b: 2, a: 1 }, a: [{ d: 4, c: 3 }] })).toEqual({
+      a: [{ c: 3, d: 4 }],
+      z: { a: 1, b: 2 },
+    })
   })
 
   it('round-trips Unicode through Base64', () => {

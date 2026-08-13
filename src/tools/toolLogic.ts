@@ -1,4 +1,4 @@
-export type ToolKind = 'json' | 'encoder' | 'timestamp' | 'jwt' | 'generator' | 'hash' | 'text' | 'url'
+export type ToolKind = 'json' | 'encoder' | 'timestamp' | 'jwt' | 'generator' | 'hash' | 'text' | 'url' | 'regex' | 'query'
 
 export function toolKindFromSlug(slug: string): ToolKind | undefined {
   const map: Record<string, ToolKind> = {
@@ -10,6 +10,8 @@ export function toolKindFromSlug(slug: string): ToolKind | undefined {
     'hash-calculator': 'hash',
     'text-workbench': 'text',
     'url-inspector': 'url',
+    'regex-workbench': 'regex',
+    'query-string-workbench': 'query',
   }
   return map[slug]
 }
@@ -22,6 +24,76 @@ export function formatJson(input: string, indent = 2) {
 export function minifyJson(input: string) {
   if (!input.trim()) return ''
   return JSON.stringify(JSON.parse(input))
+}
+
+export function sortJsonKeys(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(sortJsonKeys)
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>)
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([key, child]) => [key, sortJsonKeys(child)]),
+    )
+  }
+  return value
+}
+
+export interface JsonAnalysis {
+  valid: boolean
+  output: string
+  error?: string
+  line?: number
+  column?: number
+  rootType?: 'object' | 'array' | 'string' | 'number' | 'boolean' | 'null'
+  itemCount?: number
+  bytes: number
+}
+
+export function analyzeJson(input: string, options: { indent?: number; sortKeys?: boolean; compact?: boolean } = {}): JsonAnalysis {
+  const bytes = new TextEncoder().encode(input).byteLength
+  if (!input.trim()) return { valid: false, output: '', bytes }
+
+  try {
+    const parsed: unknown = JSON.parse(input)
+    const value = options.sortKeys ? sortJsonKeys(parsed) : parsed
+    const rootType = parsed === null ? 'null' : Array.isArray(parsed) ? 'array' : typeof parsed as JsonAnalysis['rootType']
+    const itemCount = Array.isArray(parsed)
+      ? parsed.length
+      : parsed !== null && typeof parsed === 'object'
+        ? Object.keys(parsed).length
+        : undefined
+
+    return {
+      valid: true,
+      output: JSON.stringify(value, null, options.compact ? 0 : options.indent ?? 2),
+      rootType,
+      itemCount,
+      bytes,
+    }
+  } catch (caught) {
+    const raw = caught instanceof Error ? caught.message : 'JSON 解析失败'
+    const positionMatch = raw.match(/position\s+(\d+)/i)
+    const lineColumnMatch = raw.match(/line\s+(\d+)\s+column\s+(\d+)/i)
+    let line = lineColumnMatch ? Number(lineColumnMatch[1]) : undefined
+    let column = lineColumnMatch ? Number(lineColumnMatch[2]) : undefined
+
+    if (positionMatch && (!line || !column)) {
+      const position = Number(positionMatch[1])
+      const before = input.slice(0, position)
+      const lines = before.split('\n')
+      line = lines.length
+      column = (lines.at(-1)?.length ?? 0) + 1
+    }
+
+    return {
+      valid: false,
+      output: '',
+      error: raw.replace(/^JSON\.parse:\s*/i, ''),
+      line,
+      column,
+      bytes,
+    }
+  }
 }
 
 export function base64Encode(input: string) {
