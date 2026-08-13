@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Braces, ChevronDown, Clock3, Code2, Fingerprint, KeyRound, Link2, Regex, Rows3, Search, X } from 'lucide-react'
+import { Braces, ChevronDown, Clock3, Code2, Database, FileDiff, Fingerprint, KeyRound, Link2, Regex, Rows3, Search, Timer, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const directTools = [
@@ -11,6 +11,9 @@ const directTools = [
   { slug: 'query-string-workbench', label: '查询参数', hint: 'Query String 与 JSON', icon: Rows3 },
   { slug: 'hash-calculator', label: 'Hash 计算', hint: 'SHA-256 / 384 / 512', icon: Fingerprint },
   { slug: 'url-inspector', label: 'URL 解析', hint: '结构与跟踪参数', icon: Link2 },
+  { slug: 'text-diff-workbench', label: '文本 Diff', hint: '新增、删除、统一视图', icon: FileDiff },
+  { slug: 'cron-workbench', label: 'Cron 工作台', hint: '解释与未来执行时间', icon: Timer },
+  { slug: 'sql-workbench', label: 'SQL 工作台', hint: '格式化与静态检查', icon: Database },
 ]
 
 export function ToolMenu() {

@@ -1,4 +1,4 @@
-import { ArrowRight, Box, Braces, Clock3, Code2, FileCode2, Fingerprint, KeyRound, Link2, ListChecks, Regex, Rows3, Search, ShieldCheck, TerminalSquare } from 'lucide-react'
+import { ArrowRight, Box, Braces, Clock3, Code2, Database, FileCode2, FileDiff, Fingerprint, KeyRound, Link2, ListChecks, Regex, Rows3, Search, ShieldCheck, TerminalSquare, Timer } from 'lucide-react'
 import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { resources } from '../data/resources'
@@ -23,6 +23,9 @@ const directTools = [
   { slug: 'query-string-workbench', title: '查询参数', description: 'Query String 与 JSON', icon: Rows3, accent: 'cyan' },
   { slug: 'hash-calculator', title: 'Hash 计算', description: 'SHA-256 / 384 / 512', icon: Fingerprint, accent: 'blue' },
   { slug: 'url-inspector', title: 'URL 解析', description: '结构与跟踪参数', icon: Link2, accent: 'green' },
+  { slug: 'text-diff-workbench', title: '文本 Diff', description: '新增、删除、统一视图', icon: FileDiff, accent: 'green' },
+  { slug: 'cron-workbench', title: 'Cron 工作台', description: '解释与未来执行时间', icon: Timer, accent: 'amber' },
+  { slug: 'sql-workbench', title: 'SQL 工作台', description: '格式化与静态检查', icon: Database, accent: 'blue' },
 ]
 
 const directTasks = [

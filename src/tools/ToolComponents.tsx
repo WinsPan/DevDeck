@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Check, ClipboardPaste, Copy, Download, RefreshCw, Trash2 } from 'lucide-react'
 import {
   analyzeJson,
@@ -368,6 +368,14 @@ function Workspace({ input, setInput, output, inputLabel, outputLabel, actions, 
   </div>
 }
 
+const DiffWorkbench = lazy(() => import('./DiffWorkbench'))
+const CronWorkbench = lazy(() => import('./CronWorkbench'))
+const SqlWorkbench = lazy(() => import('./SqlWorkbench'))
+
+function LazyTool({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={<div className="tool-loading"><span />正在加载工具…</div>}>{children}</Suspense>
+}
+
 export function ToolRenderer({ kind }: { kind: ToolKind }) {
   if (kind === 'json') return <JsonTool />
   if (kind === 'encoder') return <EncoderTool />
@@ -378,5 +386,8 @@ export function ToolRenderer({ kind }: { kind: ToolKind }) {
   if (kind === 'text') return <TextTool />
   if (kind === 'url') return <UrlTool />
   if (kind === 'regex') return <RegexTool />
-  return <QueryStringTool />
+  if (kind === 'query') return <QueryStringTool />
+  if (kind === 'diff') return <LazyTool><DiffWorkbench /></LazyTool>
+  if (kind === 'cron') return <LazyTool><CronWorkbench /></LazyTool>
+  return <LazyTool><SqlWorkbench /></LazyTool>
 }

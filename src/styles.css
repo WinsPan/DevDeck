@@ -368,6 +368,40 @@ a.icon-button { display: grid; }
 .clean-url { min-height: 60px; display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; align-items: center; gap: 14px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px 8px 14px; }
 .clean-url > span { color: var(--text-soft); font-size: 11px; }
 .removed-params { color: var(--text-faint); font-size: 11px; margin-top: 8px; }
+.tool-loading { min-height: 380px; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-faint); font-size: 12px; }
+.tool-loading span { width: 16px; height: 16px; border: 2px solid var(--border-strong); border-top-color: var(--brand); border-radius: 50%; animation: tool-spin .7s linear infinite; }
+@keyframes tool-spin { to { transform: rotate(360deg); } }
+.diff-summary, .sql-metrics { min-height: 48px; display: flex; align-items: center; flex-wrap: wrap; gap: 16px; border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px 7px 14px; color: var(--text-soft); font-size: 11px; margin-bottom: 12px; }
+.diff-summary .tool-button { margin-left: auto; }
+.added-text { color: var(--success); }.removed-text { color: var(--danger); }
+.diff-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.diff-inputs label { display: flex; flex-direction: column; gap: 7px; color: var(--text-soft); font-size: 11px; font-weight: 650; }
+.diff-inputs textarea { height: 250px; resize: vertical; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); padding: 13px; outline: 0; font: 12px/1.65 SFMono-Regular, Consolas, monospace; }
+.unified-diff { max-height: 480px; overflow: auto; margin-top: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font: 11px/1.6 SFMono-Regular, Consolas, monospace; }
+.unified-diff > div > div { display: grid; grid-template-columns: 28px minmax(0, 1fr); min-height: 23px; }
+.unified-diff span { display: grid; place-items: center; color: var(--text-faint); user-select: none; }
+.unified-diff code { padding: 2px 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.diff-added { background: var(--success-soft); }.diff-added span, .diff-added code { color: var(--success); }
+.diff-removed { background: var(--danger-soft); }.diff-removed span, .diff-removed code { color: var(--danger); }
+.cron-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cron-input-row label, .compact-select { display: flex; flex-direction: column; gap: 7px; color: var(--text-soft); font-size: 11px; font-weight: 650; }
+.cron-input-row input, .compact-select select { min-height: 42px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); padding: 0 11px; outline: 0; }
+.cron-presets { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+.cron-presets button { border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text-soft); padding: 7px 10px; font-size: 10px; cursor: pointer; }
+.cron-presets button:hover, .cron-presets button.active { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); }
+.cron-explanation { min-height: 84px; display: flex; flex-direction: column; justify-content: center; gap: 5px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-subtle); padding: 13px 16px; }
+.cron-explanation span, .cron-explanation small { color: var(--text-faint); font-size: 10px; }.cron-explanation strong { font-size: 16px; }
+.cron-fields { display: grid; grid-template-columns: repeat(5, 1fr); gap: 7px; margin: 12px 0; }
+.cron-fields > div { border: 1px solid var(--border); border-radius: 7px; padding: 9px; display: flex; flex-direction: column; gap: 5px; }
+.cron-fields span { color: var(--text-faint); font-size: 9px; }.cron-fields code { font-size: 12px; color: var(--brand); }
+.next-runs { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.next-runs > div:not(.panel-heading) { display: grid; grid-template-columns: 30px minmax(180px, .7fr) minmax(220px, 1fr); gap: 12px; align-items: center; min-height: 44px; padding: 7px 12px; border-bottom: 1px solid var(--border); font-size: 11px; }
+.next-runs > div:last-child { border-bottom: 0; }.next-runs > div > span { color: var(--text-faint); }.next-runs > div > code { color: var(--text-soft); }
+.sql-metrics { margin-bottom: 10px; }
+.sql-warnings { display: flex; align-items: flex-start; gap: 10px; border: 1px solid color-mix(in srgb, var(--warning) 35%, var(--border)); border-radius: 8px; background: var(--warning-soft); color: var(--warning); padding: 11px 13px; margin-bottom: 10px; }
+.sql-warnings div { display: flex; flex-direction: column; gap: 3px; }.sql-warnings strong { font-size: 11px; }.sql-warnings span { color: var(--text-soft); font-size: 10px; }
+.sql-params { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-top: 11px; color: var(--text-faint); font-size: 10px; }
+.sql-params code { background: var(--brand-soft); color: var(--brand); border-radius: 5px; padding: 4px 6px; }
 .regex-config { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; margin-bottom: 14px; }
 .regex-config > label, .regex-text { display: flex; flex-direction: column; gap: 7px; color: var(--text-soft); font-size: 11px; font-weight: 650; }
 .regex-config > label > input, .regex-expression { min-height: 42px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); padding: 0 11px; }
@@ -492,6 +526,11 @@ a.icon-button { display: grid; }
   .stat-strip { grid-template-columns: repeat(2, 1fr); }
   .stat-strip > div:nth-child(2) { border-right: 0; }.stat-strip > div:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
   .url-parts { grid-template-columns: 1fr 1fr; }
+  .diff-inputs, .cron-input-row { grid-template-columns: 1fr; }
+  .cron-fields { grid-template-columns: repeat(5, minmax(56px, 1fr)); overflow-x: auto; }
+  .next-runs > div:not(.panel-heading) { grid-template-columns: 24px minmax(180px, 1fr); }
+  .next-runs > div > code { grid-column: 2; font-size: 9px; }
+  .diff-summary .tool-button { margin-left: 0; }
   .regex-config, .regex-layout, .query-layout { grid-template-columns: 1fr; }
   .regex-text textarea { height: 240px; }
   .match-list { max-height: 240px; }

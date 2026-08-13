@@ -1,4 +1,4 @@
-export type ToolKind = 'json' | 'encoder' | 'timestamp' | 'jwt' | 'generator' | 'hash' | 'text' | 'url' | 'regex' | 'query'
+export type ToolKind = 'json' | 'encoder' | 'timestamp' | 'jwt' | 'generator' | 'hash' | 'text' | 'url' | 'regex' | 'query' | 'diff' | 'cron' | 'sql'
 
 export function toolKindFromSlug(slug: string): ToolKind | undefined {
   const map: Record<string, ToolKind> = {
@@ -12,6 +12,9 @@ export function toolKindFromSlug(slug: string): ToolKind | undefined {
     'url-inspector': 'url',
     'regex-workbench': 'regex',
     'query-string-workbench': 'query',
+    'text-diff-workbench': 'diff',
+    'cron-workbench': 'cron',
+    'sql-workbench': 'sql',
   }
   return map[slug]
 }
